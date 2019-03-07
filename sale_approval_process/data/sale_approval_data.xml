@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="margin_role_1" model="margin.role">
+            <field name="name">Manager</field>
+        </record>
+
+        <record id="margin_role_2" model="margin.role">
+            <field name="name">Sales Executive</field>
+        </record>
+
+        <record id="margin_role_3" model="margin.role">
+            <field name="name">BDM</field>
+        </record>
+
+        <record id="margin_level_1" model="sale.margin.level">
+            <field name="name" ref="margin_role_1"/>
+            <field name="min_margin">0</field>
+            <field name="max_margin">10</field>
+        </record>
+
+        <record id="margin_level_2" model="sale.margin.level">
+            <field name="name" ref="margin_role_2"/>
+            <field name="min_margin">10</field>
+            <field name="max_margin">15</field>
+        </record>
+
+        <record id="margin_level_3" model="sale.margin.level">
+           <field name="name" ref="margin_role_3"/>
+            <field name="min_margin">15</field>
+            <field name="max_margin">100</field>
+        </record>
+
+    </data>
+</odoo>

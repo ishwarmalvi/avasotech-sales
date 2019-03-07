@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="sale_margin_level_form_view" model="ir.ui.view">
+            <field name="name">sale.margin.level.form</field>
+            <field name="model">sale.margin.level</field>
+            <field name="arch" type="xml">
+                <form string="Sale Margin Level">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="min_margin"/>
+                            <field name="max_margin"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sale_margin_level_tree_view" model="ir.ui.view">
+            <field name="name">sale.margin.level.tree</field>
+            <field name="model">sale.margin.level</field>
+            <field name="arch" type="xml">
+                <tree string="Sale Margin Level">
+                    <field name="name"/>
+                    <field name="min_margin"/>
+                    <field name="max_margin"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_sale_margin_level" model="ir.actions.act_window">
+            <field name="name">Sale Margin Level</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.margin.level</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_sale_margin_level" name="Sale Margin Level" parent="sales_team.menu_sale_config" action="action_sale_margin_level"/>
+
+        <record id="res_user_form_view_inherit" model="ir.ui.view">
+            <field name="name">res.user.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="margin_level"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_sale_order_form_inherit" model="ir.ui.view">
+             <field name="name">sale.order.form.inherit</field>
+             <field name="model">sale.order</field>
+             <field name="inherit_id" ref="sale.view_order_form" />
+             <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="is_approval" invisible="1"/>
+                    <field name="is_approved" invisible="1"/>
+                </xpath>
+                <xpath expr="//header/button[@name='action_confirm'][1]" position="replace"/>
+                <xpath expr="//header/button[@name='action_confirm'][1]" position="replace">
+                    <button name="action_approval" string="Approval Sale" class="btn-primary" type="object" attrs="{'invisible': [('is_approval', '=', False)]}"/>
+                    <button name="action_confirm" string="Confirm Sale" class="btn-primary o_sale_confirm" type="object" attrs="{'invisible': [('is_approved', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_margin.sale_margin_sale_order">
+            <field name="name">sale.order.margin.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='sale_total']" position="after">
+                    <group name="sale_margin_grp">
+                        <field name="margin" groups="base.group_user" invisible="1"/>
+                        <field name="margin_percent" groups="base.group_user"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

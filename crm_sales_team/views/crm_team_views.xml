@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Crm Team Inherits view -->
+    <record id="crm_team_salesteams_search_inherit" model="ir.ui.view">
+        <field name="name">Case Teams Inherit- Search</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_salesteams_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='personal']" position="replace">
+                <filter name="personal" string="My Salesteams" domain="['|', ('member_ids', 'in', uid), ('user_id', '=', uid)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Crm Lead Inherits view -->
+    <record id="crm_case_form_view_leads_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_leads" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='team_id']" position="after">
+                <field name="lead_type"/>
+            </xpath>
+            <xpath expr="//field[@name='description']" position="after">
+                <separator string="Terms and Conditions for Sale Type" colspan="4"/>
+                <field name="lead_type_note"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_form_view_oppor_inherit" model="ir.ui.view">
+        <field name="name">crm.opportunity.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor" />
+        <field name="arch" type="xml">
+            <xpath expr="//h1" position="replace">
+                <h2 class="o_row">
+                    <div>
+                        <div class="o_row">
+                            <field name="name" placeholder="e.g. Product Pricing"/>
+                            <span class="oe_grey"> - </span>
+                            <field name="number" readonly="True"/>
+                        </div>
+                    </div>
+                </h2><br/>
+            </xpath>
+            <xpath expr="//field[@name='team_id']" position="after">
+                <field name="lead_type"/>
+            </xpath>
+            <xpath expr="//field[@name='description']" position="after">
+                <separator string="Terms and Conditions for Sale Type" colspan="4"/>
+                <field name="lead_type_note"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_form_view_oppor1_inherit" model="ir.ui.view">
+        <field name="name">sale.crm.opportunity.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor" />
+        <field name="arch" type="xml">
+             <xpath expr="//button[@name='%(sale_crm.sale_action_quotations_new)d']" position="replace">
+                <button string="New Quotation" name="%(sale_crm.sale_action_quotations_new)d" type="action" class="oe_highlight"
+                    context="{'search_default_partner_id': partner_id,
+                              'default_partner_id': partner_id,
+                              'default_team_id': team_id,
+                              'default_campaign_id': campaign_id,
+                              'default_medium_id': medium_id,
+                              'default_source_id': source_id,
+                              'default_lead_type': lead_type,
+                              'default_lead_type_note': lead_type_note}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_create_opportunity_simplified_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.simple.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_create_opportunity_simplified" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="lead_type"/>
+                <field name="lead_type_note" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Sale Order Inherits view -->
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name"> sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="lead_type"/>
+            </xpath>
+            <xpath expr="//field[@name='note']" position="after">
+                <separator string="Terms and Conditions for Sale Type" colspan="4"/>
+                <field name="lead_type_note"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Res Company Inherits view -->
+    <record id="view_company_form_inherit" model="ir.ui.view">
+        <field name="name">res.company.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="T&amp;C For Sale">
+                    <label for="product_note"/>
+                    <field name="product_note"/>
+                    <label for="services_note"/>
+                    <field name="services_note"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Res Partner Inherits view -->
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <page name="internal_notes" position="inside">
+                <separator string="Customer Product T&amp;C" colspan="4"/>
+                <field name="product_note" placeholder="Customer Product note..."/>
+                <separator string="Customer Services T&amp;C" colspan="4"/>
+                <field name="services_note" placeholder="Customer Services note..."/>
+            </page>
+        </field>
+    </record>
+
+</odoo>
