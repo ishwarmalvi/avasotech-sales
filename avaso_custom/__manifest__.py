@@ -29,7 +29,7 @@
     'company': 'Geminate Consultancy Services',
     'website': 'https://www.geminatecs.com/',
     'category': 'Misc',
-    'depends': ['crm'],
+    'depends': ['crm', 'stock_account'],
     'data': [
     ],
     'demo': [],
