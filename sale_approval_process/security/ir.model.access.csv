@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_margin_level,access_sale_margin_level,model_sale_margin_level,base.group_user,1,0,0,0
+access_margin_role,access_margin_role,model_margin_role,base.group_user,1,0,0,0

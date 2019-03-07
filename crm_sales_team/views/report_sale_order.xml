@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//div[@id='informations']" position="replace">
+                <div class="row mt32 mb32" id="informations">
+                    <div t-if="doc.client_order_ref" class="col-xs-2">
+                        <strong>Your Reference:</strong>
+                        <p t-field="doc.client_order_ref"/>
+                    </div>
+                    <div t-if="doc.date_order" class="col-xs-3">
+                        <strong t-if="doc.state not in ['draft','sent']">Date Ordered:</strong>
+                        <strong t-if="doc.state in ['draft','sent']">Quotation Date:</strong>
+                        <p t-field="doc.date_order"/>
+                    </div>
+                    <div t-if="doc.user_id.name" class="col-xs-3">
+                        <strong>Salesperson:</strong>
+                        <p t-field="doc.user_id"/>
+                    </div>
+                    <div name="payment_term" t-if="doc.payment_term_id" class="col-xs-3">
+                        <strong>Payment Terms:</strong>
+                        <p t-field="doc.payment_term_id"/>
+                    </div>
+                    <div name="sale_type" t-if="doc.lead_type" class="col-xs-3">
+                        <strong>Lead Type:</strong>
+                        <p t-field="doc.lead_type"/>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//div[@name='total']" position="after">
+                <p t-if="doc.lead_type" t-field="doc.lead_type_note"/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

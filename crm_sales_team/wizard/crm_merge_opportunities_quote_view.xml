@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_merge_opportunity_quote" model="ir.ui.view">
+            <field name="name">crm.merge.opportunity.quote.form</field>
+            <field name="model">crm.merge.opportunity.quote</field>
+            <field name="arch" type="xml">
+                <form string="Merge Opportunity With Quotation">
+                    <group>
+                         <group>
+                            <field name="opportunity_id"/>
+                         </group>
+                    </group>
+                    <footer>
+                        <button string='Link Opportunity' name="action_link_opportunity" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="merge_opportunity_quote_act" model="ir.actions.act_window">
+            <field name="name">Merge Opportunity With Quotation</field>
+            <field name="res_model">crm.merge.opportunity.quote</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+           <field name="view_id" ref="view_merge_opportunity_quote"/>
+           <field name="target">new</field>
+        </record>
+
+        <act_window
+            id="action_merge_opportunity_quote"
+            name="Merge Opportunity With Quotation"
+            multi="True"
+            key2="client_action_multi"
+            res_model="crm.merge.opportunity.quote"
+            src_model="sale.order"
+            view_mode="form"
+            target="new"
+            view_type="form"
+            groups="sales_team.group_sale_manager" />
+
+        <record id="custom_pop_message_wizard_view_form" model="ir.ui.view">
+            <field name="name">custom.pop.message.form</field>
+            <field name="model">custom.pop.message</field>
+            <field name="arch" type="xml">
+                <form string="Custom POP Message">
+                    <field name="name" readonly="1"/>
+                    <footer>
+                       <button string="Close" class="btn-default" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
