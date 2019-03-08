@@ -324,7 +324,8 @@ class AccountJournal(models.Model):
     use_in_payment = fields.Boolean("Use in payment", help="Display this bank account on messages in payment process.")
 
 class AccountMove(models.Model):
-    _inherit = "account.move"
+    _name = "account.move"
+    _inherit = ['account.move', 'mail.thread']
 
     statement_line_id = fields.Many2one('account.bank.statement.line', index=True, string='Bank statement line reconciled with this entry', copy=False, readonly=True)
 
@@ -596,3 +597,10 @@ class CRMSettings(models.TransientModel):
     @api.multi
     def set_default_use_sale_note(self):
         self.env['ir.config_parameter'].sudo().set_param("sale.default_use_sale_note", self.default_use_sale_note)
+
+class Groups(models.Model):
+    _inherit = "res.groups"
+
+    _sql_constraints = [
+        ('name_uniq', 'CHECK(1=1)', 'The name of the group must be unique within an application!')
+    ]
