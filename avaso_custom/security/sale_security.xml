@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sale.group_display_incoterm" model="res.groups">
+            <field name="name">Display incoterms on Sales Order and related invoices</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="sale.group_mrp_properties" model="res.groups">
+            <field name="name">Properties on lines</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+    </data>
+</odoo>
