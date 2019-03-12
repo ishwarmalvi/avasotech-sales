@@ -29,9 +29,10 @@
     'company': 'Geminate Consultancy Services',
     'website': 'https://www.geminatecs.com/',
     'category': 'Misc',
-    'depends': ['crm', 'stock_account', 'sale'],
+    'depends': ['account', 'crm', 'stock_account', 'sale'],
     'data': [
         'security/sale_security.xml',
+        'views/avaso_custom_view.xml',
     ],
     'demo': [],
     'installable': True,
