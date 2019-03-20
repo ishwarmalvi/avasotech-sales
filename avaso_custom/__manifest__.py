@@ -21,7 +21,7 @@
 
 {
     'name': 'Avaso Custom',
-    'summary': """Avaso Custom""",
+    'summary': """Avaso Custom to fix saas db""",
     'version': '10.0.1',
     'description': """
     """,
