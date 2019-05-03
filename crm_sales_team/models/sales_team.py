@@ -55,6 +55,11 @@ class Lead(FormatAddress, models.Model):
             else:
                 self.lead_type_note = company_id.services_note
 
+    @api.model
+    def create(self, vals):
+        vals['number'] = self.env['ir.sequence'].next_by_code('crm.lead')
+        return super(Lead, self).create(vals)
+
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
