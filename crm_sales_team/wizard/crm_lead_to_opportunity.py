@@ -19,10 +19,3 @@ class Lead2OpportunityPartner(models.TransientModel):
             if not user_in_team:
                 values = self.env['crm.lead']._onchange_user_values(self.user_id.id if self.user_id else False)
                 self.team_id = values.get('team_id', False)
-
-    @api.multi
-    def action_apply(self):
-        res = super(Lead2OpportunityPartner, self).action_apply()
-        lead = self.env['crm.lead'].browse(self._context.get('active_ids', []))
-        lead.number = self.env['ir.sequence'].next_by_code('crm.lead')
-        return res

@@ -19,6 +19,22 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_form_view_leads" />
         <field name="arch" type="xml">
+            <xpath expr="//h1" position="replace">
+                <h2 class="o_row">
+                    <div>
+                        <div class="o_row">
+                            <field name="name" placeholder="Describe the lead..."/>
+                            <span class="oe_grey"> - </span>
+                            <field name="number" readonly="True"/>
+                        </div>
+                    </div>
+                </h2><br/>
+            </xpath>
+            <xpath expr="//group/group/field[@name='partner_id']" position="replace">
+                <field name="partner_id" string="Customer"
+                    options='{"create_name_field": "name"}'
+                    context="{'default_name': contact_name, 'default_street': street, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_function': function, 'default_phone': phone, 'default_mobile': mobile, 'default_fax': fax, 'default_email': email_from, 'default_user_id': user_id, 'default_team_id': team_id}" required="1"/>
+            </xpath>
             <xpath expr="//field[@name='team_id']" position="after">
                 <field name="lead_type"/>
             </xpath>
@@ -44,6 +60,18 @@
                         </div>
                     </div>
                 </h2><br/>
+            </xpath>
+            <xpath expr="//group/group/field[@name='partner_id']" position="replace">
+                <field name="partner_id"
+                    string="Customer" domain="[('customer', '=', True)]"
+                    context="{'search_default_customer': 1,
+                        'default_name': partner_name, 'default_street': street,
+                        'default_street2': street2, 'default_city': city,
+                        'default_state_id': state_id, 'default_zip': zip,
+                        'default_country_id': country_id, 'default_function': function,
+                        'default_phone': phone, 'default_mobile': mobile,
+                        'default_fax': fax, 'default_email': email_from,
+                        'default_user_id': user_id, 'default_team_id': team_id}" required="1"/>
             </xpath>
             <xpath expr="//field[@name='team_id']" position="after">
                 <field name="lead_type"/>
@@ -79,7 +107,8 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.view_create_opportunity_simplified" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='partner_id']" position="after">
+            <xpath expr="//field[@name='partner_id']" position="replace">
+                <field name="partner_id" required="1"/>
                 <field name="lead_type"/>
                 <field name="lead_type_note" invisible="1"/>
             </xpath>
